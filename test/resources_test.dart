@@ -19,29 +19,37 @@ void main() {
     });
 
     test('Create Note', () {
-      final _note = Note('', 'foobar', '');
+      List<Note> _notes;
+      final _note = Note(null, 'foobar', '');
       _noteRepository.createNote(_note);
-      final _notes = _noteRepository.getNotes();
+      _notes = _noteRepository.getNotes();
       expect(_notes.length, 1);
     });
 
     test('Update Note', () {
-      final _note = Note('', 'foobar', '');
+      List<Note> _notes;
+      final _note = Note(null, 'foobar', '');
       _noteRepository.createNote(_note);
-      final _noteUpdated = Note('', 'hello', '');
+      _notes = _noteRepository.getNotes();
+      print(_notes[0].id);
+      print(_notes[0].title);
+      final _noteUpdated = Note(_notes[0].id, 'hello', '');
       _noteRepository.updateNote(_noteUpdated);
-      final _notes = _noteRepository.getNotes();
+      _notes = _noteRepository.getNotes();
       expect(_notes[0].title, 'hello');
+      print(_notes[0].id);
+      print(_notes[0].title);
     });
 
     test('Delete Note', () {
-      final _note = Note('', 'foobar', '');
+      List<Note> _notes;
+      final _note = Note(null, 'foobar', '');
       _noteRepository.createNote(_note);
-      final _notes1 = _noteRepository.getNotes();
-      expect(_notes1.length, 1);
+      _notes = _noteRepository.getNotes();
+      expect(_notes.length, 1);
       _noteRepository.deleteNote(_note);
-      final _notes2 = _noteRepository.getNotes();
-      expect(_notes2.length, 0);
+      _notes = _noteRepository.getNotes();
+      expect(_notes.length, 0);
     });
   });
 }
