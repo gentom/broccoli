@@ -10,21 +10,21 @@ class NoteBloc {
   Stream<List<Note>> get notesStream => _stateSubject.stream;
   Sink<NoteEvent> get noteEventSink => _eventSubject.sink;
   List<Note> get notes => _stateSubject.stream.value;
-  
+
   NoteBloc(this._noteRepository);
 
   void mapEventToState(NoteEvent event) {
     if (event is GetNotes) {
-      getNotes();
+      _getNotes();
     } else if (event is CreateNote) {
       _noteRepository.createNote(event.note);
-      getNotes();
+      _getNotes();
     } else if (event is UpdateNote) {
       _noteRepository.updateNote(event.note);
-      getNotes();
+      _getNotes();
     } else if (event is DeleteNote) {
       _noteRepository.deleteNote(event.note);
-      getNotes();
+      _getNotes();
     }
   }
 
@@ -33,7 +33,7 @@ class NoteBloc {
     _eventSubject.close();
   }
 
-  void getNotes() {
+  void _getNotes() {
     _stateSubject.sink.add(_noteRepository.getNotes());
   }
 }
