@@ -11,7 +11,9 @@ class NoteBloc {
   Sink<NoteEvent> get noteEventSink => _eventSubject.sink;
   List<Note> get notes => _stateSubject.stream.value;
 
-  NoteBloc(this._noteRepository);
+  NoteBloc(this._noteRepository) {
+    _eventSubject.stream.listen(mapEventToState);
+  }
 
   void mapEventToState(NoteEvent event) {
     if (event is GetNotes) {
