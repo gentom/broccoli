@@ -60,6 +60,21 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                note.title,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  decoration: TextDecoration.combine([
+                    TextDecoration.none
+                  ])
+                ),
+              ),
+            ],
+          ),
+          Row(
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.details),
